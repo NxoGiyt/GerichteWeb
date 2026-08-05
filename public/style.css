@@ -885,6 +885,11 @@ select {
     border-color: #d9aaa2;
 }
 
+.fish-option:has(input:checked) {
+    background: #e5f4f8;
+    border-color: #9acbd9;
+}
+
 .vegetarian-option:has(input:checked) {
     background: #e8f3e8;
 
