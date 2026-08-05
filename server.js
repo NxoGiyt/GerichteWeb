@@ -22,8 +22,8 @@ app.get("/", async (req, res) => {
     try {
 
         const result = await db.query(
-            "SELECT * FROM dishes ORDER BY created_at DESC"
-        );
+    "SELECT * FROM dishes ORDER BY name ASC"
+);
 
         res.render("index", {
             dishes: result.rows
