@@ -501,8 +501,8 @@ if(searchInput){
 // =====================================
 
 
-const categoryButtons =
-document.querySelectorAll(".filter");
+const categoryFilter =
+document.getElementById("categoryFilter");
 
 
 const preparationFilter =
@@ -511,11 +511,6 @@ document.getElementById("preparationFilter");
 
 const countryFilter =
 document.getElementById("countryFilter");
-
-
-
-let currentCategory = "alle";
-
 
 
 function applyFilters(){
@@ -546,14 +541,21 @@ card.dataset.preparation;
 const country =
 card.dataset.country;
 
+if(categoryFilter){
+
+    const selectedCategories =
+    Array.from(categoryFilter.selectedOptions)
+    .map(option => option.value.toLowerCase());
 
 
-if(
-currentCategory !== "alle" &&
-category !== currentCategory
-){
+    if(
+        selectedCategories.length > 0 &&
+        !selectedCategories.includes(category)
+    ){
 
-show = false;
+        show = false;
+
+    }
 
 }
 
@@ -594,39 +596,14 @@ show ? "" : "none";
 
 }
 
+if(categoryFilter){
 
+    categoryFilter.addEventListener(
+        "change",
+        applyFilters
+    );
 
-
-categoryButtons.forEach(button=>{
-
-
-button.addEventListener("click",()=>{
-
-
-categoryButtons.forEach(btn=>{
-
-btn.classList.remove("active");
-
-});
-
-
-button.classList.add("active");
-
-
-currentCategory =
-button.dataset.category;
-
-
-
-updateCards();
-
-
-});
-
-
-});
-
-
+}
 
 if(preparationFilter){
 

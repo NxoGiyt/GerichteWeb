@@ -110,37 +110,29 @@
 
             <div class="filter-group">
 
-                <label>Ernährung</label>
+<label>Ernährung</label>
 
-                <div class="filter-buttons">
+<select id="categoryFilter" multiple>
 
-                    <button 
-class="filter active"
-data-category="alle">
-    Alle
-</button>
+    <option value="Fleisch">
+        🥩 Fleisch
+    </option>
 
-<button 
-class="filter"
-data-category="fleisch">
-    🥩 Fleisch
-</button>
+    <option value="Fisch">
+        🐟 Fisch
+    </option>
 
-<button 
-class="filter"
-data-category="vegetarisch">
-    🥬 Vegetarisch
-</button>
+    <option value="Vegetarisch">
+        🥬 Vegetarisch
+    </option>
 
-<button 
-class="filter"
-data-category="vegan">
-    🌱 Vegan
-</button>
+    <option value="Vegan">
+        🌱 Vegan
+    </option>
 
-                </div>
+</select>
 
-            </div>
+</div>
 
 
             <div class="filter-group">
@@ -287,18 +279,11 @@ data-category="vegan">
                             🥩 Fleisch
                         </span>
 
-                    <% } else if (dish.category === 'Fisch') { %>
-
-                        <span class="tag fish">
-                            🐟 Fisch
-                        </span>
-
                     <% } else if (dish.category === 'Vegetarisch') { %>
 
                         <span class="tag vegetarian">
                             🥬 Vegetarisch
                         </span>
-
 
                     <% } else { %>
 
@@ -410,64 +395,58 @@ data-category="vegan">
 
                 <div class="category-options">
 
-                    <label class="category-option meat-option">
+    <label class="category-option meat-option">
+        <input
+            type="radio"
+            name="category"
+            value="Fleisch"
+            required
+        >
 
-                        <input
-                            type="radio"
-                            name="category"
-                            value="Fleisch"
-                            required
-                        >
-
-                        <span>🥩</span>
-                        Fleisch
-
-                    </label>
-
-                    <label class="category-option fish-option">
-
-                        <input
-                            type="radio"
-                            name="category"
-                            value="Fisch"
-                            required
-                        >
-
-                        <span>🥩</span>
-                        Fisch
-
-                    </label>
-                    
+        <span>🥩</span>
+        Fleisch
+    </label>
 
 
-                    <label class="category-option vegetarian-option">
+    <label class="category-option fish-option">
 
-                        <input
-                            type="radio"
-                            name="category"
-                            value="Vegetarisch"
-                        >
+        <input
+            type="radio"
+            name="category"
+            value="Fisch"
+        >
 
-                        <span>🥬</span>
-                        Vegetarisch
+        <span>🐟</span>
+        Fisch
+    </label>
 
-                    </label>
+
+    <label class="category-option vegetarian-option">
+
+        <input
+            type="radio"
+            name="category"
+            value="Vegetarisch"
+        >
+
+        <span>🥬</span>
+        Vegetarisch
+    </label>
 
 
-                    <label class="category-option vegan-option">
+    <label class="category-option vegan-option">
 
-                        <input
-                            type="radio"
-                            name="category"
-                            value="Vegan"
-                        >
+        <input
+            type="radio"
+            name="category"
+            value="Vegan"
+        >
 
-                        <span>🌱</span>
-                        Vegan
+        <span>🌱</span>
+        Vegan
+    </label>
 
-                    </label>
-
-                </div>
+</div>
 
             </div>
 

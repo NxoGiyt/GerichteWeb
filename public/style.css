@@ -1314,3 +1314,18 @@ select {
 
 }
 }
+
+select[multiple] {
+
+    min-height:120px;
+
+    cursor:pointer;
+
+}
+
+
+select[multiple] option {
+
+    padding:10px;
+
+}
