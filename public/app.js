@@ -515,6 +515,7 @@ document.getElementById("countryFilter");
 
 function applyFilters(){
 
+let visibleCount = 0;
 
 const cards =
 document.querySelectorAll(".dish-card");
@@ -599,8 +600,27 @@ show = false;
 card.style.display =
 show ? "" : "none";
 
+if(show){
+    visibleCount++;
+}
+
 
 });
+
+const result =
+document.getElementById("resultCount");
+
+
+if(result){
+
+    result.textContent =
+    `${visibleCount} ${
+        visibleCount === 1
+        ? "Gericht"
+        : "Gerichte"
+    } gefunden`;
+
+}
 
 
 }
