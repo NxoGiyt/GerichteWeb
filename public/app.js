@@ -537,7 +537,10 @@ card.dataset.preparation.toLowerCase();
 
 
 const country =
-card.dataset.country.toLowerCase();
+card.dataset.country
+.toLowerCase()
+.replace(/[^\p{L}\s]/gu, "")
+.trim();
 
 
 
