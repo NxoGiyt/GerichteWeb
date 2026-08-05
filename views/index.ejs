@@ -259,12 +259,22 @@
         </button>
 
         <% if (dish.category === 'Vegan') { %>
-            🌱
-        <% } else if (dish.category === 'Vegetarisch') { %>
-            🥬
-        <% } else { %>
-            🥩
-        <% } %>
+
+    🌱
+
+<% } else if (dish.category === 'Vegetarisch') { %>
+
+    🥬
+
+<% } else if (dish.category === 'Fisch') { %>
+
+    🐟
+
+<% } else { %>
+
+    🥩
+
+<% } %>
 
     </div>
 
@@ -275,23 +285,29 @@
 
                     <% if (dish.category === 'Fleisch') { %>
 
-                        <span class="tag meat">
-                            🥩 Fleisch
-                        </span>
+    <span class="tag meat">
+        🥩 Fleisch
+    </span>
 
-                    <% } else if (dish.category === 'Vegetarisch') { %>
+<% } else if (dish.category === 'Fisch') { %>
 
-                        <span class="tag vegetarian">
-                            🥬 Vegetarisch
-                        </span>
+    <span class="tag fish">
+        🐟 Fisch
+    </span>
 
-                    <% } else { %>
+<% } else if (dish.category === 'Vegetarisch') { %>
 
-                        <span class="tag vegan">
-                            🌱 Vegan
-                        </span>
+    <span class="tag vegetarian">
+        🥬 Vegetarisch
+    </span>
 
-                    <% } %>
+<% } else { %>
+
+    <span class="tag vegan">
+        🌱 Vegan
+    </span>
+
+<% } %>
 
 
                     <% if (dish.country && dish.country !== 'Keine Angabe') { %>
@@ -410,15 +426,16 @@
 
     <label class="category-option fish-option">
 
-        <input
-            type="radio"
-            name="category"
-            value="Fisch"
-        >
+    <input
+        type="radio"
+        name="category"
+        value="Fisch"
+    >
 
-        <span>🐟</span>
-        Fisch
-    </label>
+    <span>🐟</span>
+    Fisch
+
+</label>
 
 
     <label class="category-option vegetarian-option">

@@ -1329,3 +1329,11 @@ select[multiple] option {
     padding:10px;
 
 }
+
+.tag.fish {
+
+    background: #e5f1f8;
+
+    color: #27617d;
+
+}
