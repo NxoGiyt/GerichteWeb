@@ -495,7 +495,7 @@ if(searchInput){
 
     searchInput.addEventListener(
         "input",
-        updateCards
+        applyFilters
     );
 
 }
