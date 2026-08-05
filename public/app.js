@@ -543,9 +543,18 @@ card.dataset.country;
 
 if(categoryFilter){
 
-    const selectedCategories =
-    Array.from(categoryFilter.selectedOptions)
-    .map(option => option.value.toLowerCase());
+    const selectedCategory =
+categoryFilter.value.toLowerCase();
+
+
+if(
+selectedCategory !== "alle kategorien" &&
+category !== selectedCategory
+){
+
+    show = false;
+
+}
 
 
     if(
