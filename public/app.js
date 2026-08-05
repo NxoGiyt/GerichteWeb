@@ -521,6 +521,11 @@ function applyFilters(){
 
 let visibleCount = 0;
 
+const search =
+searchInput
+? searchInput.value.toLowerCase().trim()
+: "";
+
 const cards =
 document.querySelectorAll(".dish-card");
 
@@ -529,6 +534,19 @@ cards.forEach(card=>{
 
 
 let show = true;
+
+const name =
+card.dataset.name.toLowerCase();
+
+
+if(
+    search &&
+    !name.includes(search)
+){
+
+    show = false;
+
+}
 
 
 const category =
