@@ -545,22 +545,11 @@ card.dataset.country;
 if(categoryFilter){
 
     const selectedCategory =
-categoryFilter.value.toLowerCase();
-
-
-if(
-selectedCategory !== "alle kategorien" &&
-category !== selectedCategory
-){
-
-    show = false;
-
-}
-
+        categoryFilter.value.toLowerCase();
 
     if(
-        selectedCategories.length > 0 &&
-        !selectedCategories.includes(category)
+        selectedCategory !== "alle arten" &&
+        category !== selectedCategory
     ){
 
         show = false;
@@ -568,7 +557,6 @@ category !== selectedCategory
     }
 
 }
-
 
 
 if(
