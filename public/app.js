@@ -381,21 +381,24 @@ function updateCards(){
 
         const text = (
 
-            card.dataset.name +
+    card.dataset.name +
 
-            " " +
+    " " +
 
-            card.dataset.category +
+    card.dataset.category +
 
-            " " +
+    " " +
 
-            card.dataset.country +
+    card.dataset.country +
 
-            " " +
+    " " +
 
-            card.dataset.preparation
+    card.dataset.preparation
 
-        ).toLowerCase();
+)
+.toLowerCase()
+.replace(/[^\p{L}\s]/gu, " ")
+.trim();
 
 
 

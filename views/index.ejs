@@ -63,7 +63,9 @@
     <div class="stat-card">
     <div class="stat-icon fish">🐟</div>
     <div>
-        <strong>0</strong>
+        <strong>
+            <%= dishes.filter(d => d.category === "Fisch").length %>
+        </strong>
         <span>Fisch</span>
     </div>
 </div>
