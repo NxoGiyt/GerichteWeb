@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Unsere Gerichte</title>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="header-content">
+
+            <div>
+                <div class="eyebrow">UNSERE FAMILIENKÜCHE</div>
+
+                <h1>Was gibt's heute? 🍽️</h1>
+
+                <p>
+                    Unsere persönliche Sammlung an Lieblingsgerichten –
+                    übersichtlich, lecker und immer griffbereit.
+                </p>
+            </div>
+
+            <button class="add-button" id="openAddDish">
+    <span>＋</span>
+    Gericht hinzufügen
+</button>
+
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <!-- Statistik -->
+
+        <section class="stats">
+
+    <div class="stat-card">
+        <div class="stat-icon">🍽️</div>
+        <div>
+            <strong><%= dishes.length %></strong>
+            <span>Gerichte</span>
+        </div>
+    </div>
+
+
+    <div class="stat-card">
+        <div class="stat-icon meat">🥩</div>
+        <div>
+            <strong>
+                <%= dishes.filter(d => d.category === "Fleisch").length %>
+            </strong>
+            <span>Fleisch</span>
+        </div>
+    </div>
+
+
+    <div class="stat-card">
+        <div class="stat-icon veggie">🥬</div>
+        <div>
+            <strong>
+                <%= dishes.filter(d => d.category === "Vegetarisch").length %>
+            </strong>
+            <span>Vegetarisch</span>
+        </div>
+    </div>
+
+
+    <div class="stat-card">
+        <div class="stat-icon vegan">🌱</div>
+        <div>
+            <strong>
+                <%= dishes.filter(d => d.category === "Vegan").length %>
+            </strong>
+            <span>Vegan</span>
+        </div>
+    </div>
+
+</section>
+
+
+        <!-- Suche -->
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <span>🔎</span>
+
+                <input
+    type="text"
+    id="searchInput"
+    placeholder="Gericht suchen..."
+>
+
+            </div>
+
+        </section>
+
+
+        <!-- Filter -->
+
+        <section class="filter-section">
+
+            <div class="filter-group">
+
+                <label>Ernährung</label>
+
+                <div class="filter-buttons">
+
+                    <button 
+class="filter active"
+data-category="alle">
+    Alle
+</button>
+
+<button 
+class="filter"
+data-category="fleisch">
+    🥩 Fleisch
+</button>
+
+<button 
+class="filter"
+data-category="vegetarisch">
+    🥬 Vegetarisch
+</button>
+
+<button 
+class="filter"
+data-category="vegan">
+    🌱 Vegan
+</button>
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label>Zubereitung</label>
+
+                <select id="preparationFilter">
+                    <option>Alle Zubereitungsarten</option>
+                    <option>Pfanne</option>
+                    <option>Ofen</option>
+                    <option>Grill</option>
+                    <option>Topf</option>
+                    <option>Salat</option>
+                    <option>Keine Angabe</option>
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label>Herkunft</label>
+
+                <select id="countryFilter">
+                    <option>Alle Länder</option>
+                    <option>🇩🇪 Deutschland</option>
+                    <option>🇮🇹 Italien</option>
+                    <option>🇬🇷 Griechenland</option>
+                    <option>🇹🇷 Türkei</option>
+                    <option>🇲🇽 Mexiko</option>
+                    <option>🇮🇳 Indien</option>
+                    <option>🇨🇳 China</option>
+                </select>
+
+            </div>
+
+
+            <div class="filter-group">
+
+                <label>Sortierung</label>
+
+                <select id="sortFilter">
+
+    <option value="az">
+        A – Z
+    </option>
+
+    <option value="za">
+        Z – A
+    </option>
+
+    <option value="newest">
+        Neueste zuerst
+    </option>
+
+</select>
+
+            </div>
+
+        </section>
+
+
+        <!-- Überschrift -->
+
+        <div class="section-heading">
+
+            <div>
+                <h2>Gefundene Gerichte:</h2>
+                <p id="resultCount">
+    <%= dishes.length %> Gerichte gefunden
+</p>
+            </div>
+
+        </div>
+
+
+        <!-- Beispielkarten -->
+
+        <section class="dish-grid">
+
+    <% if (dishes.length === 0) { %>
+
+        <div class="empty-state">
+            <div class="empty-icon">🍽️</div>
+            <h3>Noch keine Gerichte</h3>
+            <p>
+                Fügt euer erstes Familiengericht hinzu.
+            </p>
+
+            <button class="empty-add-button" id="emptyAddDish">
+                ＋ Erstes Gericht hinzufügen
+            </button>
+        </div>
+
+    <% } %>
+
+
+    <% dishes.forEach(dish => { %>
+
+        <article
+    class="dish-card"
+
+    data-name="<%= dish.name.toLowerCase() %>"
+
+    data-category="<%= dish.category.toLowerCase() %>"
+
+    data-country="<%= dish.country.toLowerCase() %>"
+
+    data-preparation="<%= dish.preparation.toLowerCase() %>"
+>
+
+    <div class="dish-image
+        <%= dish.category === 'Vegan' ? 'green' :
+            dish.category === 'Vegetarisch' ? 'lightgreen' :
+            'red' %>">
+
+        <button
+            type="button"
+            class="delete-button"
+            data-id="<%= dish.id %>"
+            title="Gericht löschen"
+        >
+            🗑️
+        </button>
+
+        <% if (dish.category === 'Vegan') { %>
+            🌱
+        <% } else if (dish.category === 'Vegetarisch') { %>
+            🥬
+        <% } else { %>
+            🥩
+        <% } %>
+
+    </div>
+
+
+            <div class="dish-content">
+
+                <div class="tags">
+
+                    <% if (dish.category === 'Fleisch') { %>
+
+                        <span class="tag meat">
+                            🥩 Fleisch
+                        </span>
+
+                    <% } else if (dish.category === 'Vegetarisch') { %>
+
+                        <span class="tag vegetarian">
+                            🥬 Vegetarisch
+                        </span>
+
+                    <% } else { %>
+
+                        <span class="tag vegan">
+                            🌱 Vegan
+                        </span>
+
+                    <% } %>
+
+
+                    <% if (dish.country && dish.country !== 'Keine Angabe') { %>
+
+                        <span class="tag country">
+                            <%= dish.country %>
+                        </span>
+
+                    <% } %>
+
+                </div>
+
+
+                <h3>
+                    <%= dish.name %>
+                </h3>
+
+
+                <% if (dish.description && dish.description.trim() !== "") { %>
+    <p>
+        <%= dish.description %>
+    </p>
+<% } %>
+
+
+                <div class="dish-footer">
+
+    <span>
+        🍳 <%= dish.preparation %>
+    </span>
+
+    <div class="dish-actions">
+
+    <button
+    class="details-button"
+
+    data-name="<%= dish.name %>"
+    data-category="<%= dish.category %>"
+    data-country="<%= dish.country %>"
+    data-preparation="<%= dish.preparation %>"
+    data-description="<%= dish.description %>"
+>
+    Details →
+</button>
+
+</div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    <% }) %>
+
+</section>
+
+    </main>
+<div class="modal-overlay" id="dishModal">
+
+    <div class="modal">
+
+        <button class="modal-close" id="closeModal">
+            ×
+        </button>
+
+        <div class="modal-header">
+            <span class="modal-icon">🍽️</span>
+
+            <div>
+                <h2>Gericht hinzufügen</h2>
+                <p>Füge ein neues Familiengericht hinzu.</p>
+            </div>
+        </div>
+
+
+        <form id="dishForm">
+
+            <div class="form-group">
+
+                <label for="dishName">
+                    Name des Gerichts *
+                </label>
+
+                <input
+                    id="dishName"
+                    name="name"
+                    type="text"
+                    placeholder="z. B. Lasagne"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Ernährungsart *
+                </label>
+
+                <div class="category-options">
+
+                    <label class="category-option meat-option">
+
+                        <input
+                            type="radio"
+                            name="category"
+                            value="Fleisch"
+                            required
+                        >
+
+                        <span>🥩</span>
+                        Fleisch
+
+                    </label>
+
+
+                    <label class="category-option vegetarian-option">
+
+                        <input
+                            type="radio"
+                            name="category"
+                            value="Vegetarisch"
+                        >
+
+                        <span>🥬</span>
+                        Vegetarisch
+
+                    </label>
+
+
+                    <label class="category-option vegan-option">
+
+                        <input
+                            type="radio"
+                            name="category"
+                            value="Vegan"
+                        >
+
+                        <span>🌱</span>
+                        Vegan
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="preparation">
+                        Zubereitungsart
+                    </label>
+
+                    <select
+                        id="preparation"
+                        name="preparation"
+                    >
+
+                        <option value="">
+                            Auswählen
+                        </option>
+
+                        <option>Pfanne</option>
+                        <option>Ofen</option>
+                        <option>Grill</option>
+                        <option>Topf</option>
+                        <option>Salat</option>
+                        <option>Keine Angabe</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="country">
+                        Herkunftsland
+                    </label>
+
+                    <select
+                        id="country"
+                        name="country"
+                    >
+
+                        <option value="">
+                            Auswählen
+                        </option>
+
+                        <option>🇩🇪 Deutschland</option>
+                        <option>🇮🇹 Italien</option>
+                        <option>🇬🇷 Griechenland</option>
+                        <option>🇹🇷 Türkei</option>
+                        <option>🇲🇽 Mexiko</option>
+                        <option>🇮🇳 Indien</option>
+                        <option>🇨🇳 China</option>
+                        <option>🇯🇵 Japan</option>
+                        <option>🇺🇸 USA</option>
+                        <option>🌍 Andere</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="description">
+                    Beschreibung
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Optional: kurze Beschreibung des Gerichts..."
+                    rows="4"
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-dish"
+            >
+                Gericht hinzufügen
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+    <script src="/app.js"></script>
+
+<!-- DETAILS MODAL -->
+
+<div class="modal-overlay" id="detailsModal">
+
+    <div class="modal">
+
+        <button class="modal-close" id="closeDetails">
+            ×
+        </button>
+
+        <div class="modal-header">
+
+            <div class="modal-icon">
+                🍽️
+            </div>
+
+            <div>
+
+                <h2 id="detailsName">
+                    Gericht
+                </h2>
+
+                <p>
+                    Informationen zum Gericht
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="details-list">
+
+            <div class="detail-row">
+
+                <strong>🥩 Kategorie</strong>
+
+                <span id="detailsCategory"></span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>🌍 Herkunft</strong>
+
+                <span id="detailsCountry"></span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>🍳 Zubereitung</strong>
+
+                <span id="detailsPreparation"></span>
+
+            </div>
+
+            <div
+                class="detail-row"
+                id="descriptionRow"
+            >
+
+                <strong>📝 Beschreibung</strong>
+
+                <span id="detailsDescription"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

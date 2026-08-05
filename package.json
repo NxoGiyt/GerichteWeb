@@ -1,0 +1,16 @@
+{
+  "name": "gerichteweb",
+  "version": "1.0.0",
+  "description": "Familiengerichte",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0",
+    "pg": "^8.22.0"
+  }
+}
