@@ -522,31 +522,30 @@ const cards =
 document.querySelectorAll(".dish-card");
 
 
-
 cards.forEach(card=>{
 
 
 let show = true;
 
 
-
 const category =
-card.dataset.category;
-
+card.dataset.category.toLowerCase();
 
 
 const preparation =
-card.dataset.preparation;
-
+card.dataset.preparation.toLowerCase();
 
 
 const country =
-card.dataset.country;
+card.dataset.country.toLowerCase();
+
+
 
 if(categoryFilter){
 
     const selectedCategory =
         categoryFilter.value.toLowerCase();
+
 
     if(
         selectedCategory !== "alle arten" &&
@@ -560,27 +559,40 @@ if(categoryFilter){
 }
 
 
-if(
-preparationFilter &&
-preparationFilter.value !== "Alle Zubereitungsarten"
-&&
-preparation !== preparationFilter.value.toLowerCase()
-){
 
-show = false;
+if(preparationFilter){
+
+    const selectedPreparation =
+        preparationFilter.value.toLowerCase();
+
+
+    if(
+        selectedPreparation !== "alle zubereitungsarten" &&
+        preparation !== selectedPreparation
+    ){
+
+        show = false;
+
+    }
 
 }
 
 
 
-if(
-countryFilter &&
-countryFilter.value !== "Alle Länder"
-&&
-country !== countryFilter.value.toLowerCase()
-){
+if(countryFilter){
 
-show = false;
+    const selectedCountry =
+        countryFilter.value.toLowerCase();
+
+
+    if(
+        selectedCountry !== "alle länder" &&
+        country !== selectedCountry
+    ){
+
+        show = false;
+
+    }
 
 }
 
@@ -589,12 +601,17 @@ show = false;
 card.style.display =
 show ? "" : "none";
 
+
 if(show){
+
     visibleCount++;
+
 }
 
 
 });
+
+
 
 const result =
 document.getElementById("resultCount");
@@ -627,7 +644,7 @@ if(preparationFilter){
 
 preparationFilter.addEventListener(
 "change",
-updateCards
+applyFilters
 );
 
 }
@@ -638,9 +655,8 @@ if(countryFilter){
 
 countryFilter.addEventListener(
 "change",
-updateCards
+applyFilters
 );
-
 }
 
 // =====================================
