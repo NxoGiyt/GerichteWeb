@@ -415,18 +415,19 @@ function updateCards(){
         }
 
 
+        if(categoryFilter){
 
-        // Kategorie Filter
+    const selectedCategory =
+        categoryFilter.value.toLowerCase();
 
-        if(
-            currentCategory !== "alle" &&
-            card.dataset.category !== currentCategory
-        ){
+    if(
+        selectedCategory !== "alle arten" &&
+        category !== selectedCategory
+    ){
+        show = false;
+    }
 
-            visible = false;
-
-        }
-
+}
 
 
         // Zubereitung Filter
