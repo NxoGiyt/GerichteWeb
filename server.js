@@ -5,7 +5,6 @@ const db = require("./database");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -17,6 +16,31 @@ app.use(express.json());
 // ===============================
 // STARTSEITE
 // ===============================
+
+app.get("/", async (req, res) => {
+
+    try {
+
+        const result = await db.query(
+            "SELECT * FROM dishes ORDER BY created_at DESC"
+        );
+
+        res.render("index", {
+            dishes: result.rows
+        });
+
+
+    } catch(error) {
+
+        console.error(error);
+
+        res.send(
+            "Fehler beim Laden der Gerichte."
+        );
+
+    }
+
+});
 
 app.post("/api/dishes", async (req, res) => {
 
